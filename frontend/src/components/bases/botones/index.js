@@ -1,0 +1,5 @@
+export { default as BtnCancel } from './BtnCancel.vue'
+export { default as BtnEdit } from './BtnEdit.vue'
+export { default as BtnAccept } from './BtnAccept.vue'
+export { default as BtnSave } from './BtnSave.vue'
+export { default as BtnDanger } from './BtnDanger.vue'
