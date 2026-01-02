@@ -11,13 +11,7 @@
         </div>
       </div>
       <div class="flex-1 min-w-0 flex flex-col h-full">
-        <NavBar :title="(authSession.typeText || '') + (authSession.companyTradeName ? ' • ' + authSession.companyTradeName : '')" :items="navItems" :showSidebarToggle="true" />
-        <!-- Mobile menu toggle (if NavBar doesn't handle it) -->
-        <div class="md:hidden px-4 py-2">
-          <button class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm" @click="sidebarOpen = !sidebarOpen">
-            <span>Menú</span>
-          </button>
-        </div>
+        <NavBar :title="(authSession.typeText || '') + (authSession.companyTradeName ? ' • ' + authSession.companyTradeName : '')" :items="navItems" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
         <div class="flex-1 min-h-0 overflow-y-auto">
           <RolesPanel v-if="panel === 'roles'" />
           <ModulesPanel v-else-if="panel === 'módulos' || panel === 'modulos'" />

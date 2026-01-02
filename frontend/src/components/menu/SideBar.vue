@@ -1,7 +1,7 @@
 <template>
-  <aside :class="['bg-white border-r border-slate-200', isOpen ? 'w-64' : 'w-16']" class="h-screen sticky top-0 flex-shrink-0">
+  <aside :class="['bg-white border-r border-slate-200 transition-all duration-200', isOpen ? 'w-64' : 'w-16']" class="h-screen sticky top-0 flex-shrink-0">
     <div class="h-14 flex items-center px-3 border-b border-slate-200">
-      <button @click="isOpen = !isOpen" class="p-2 rounded hover:bg-slate-100" aria-label="Toggle sidebar">
+      <button @click="isOpen = !isOpen" class="hidden md:inline-flex p-2 rounded hover:bg-slate-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -15,9 +15,9 @@
           <button
             @click="toggleGroup(idx)"
             :aria-expanded="isGroupOpen(idx)"
-            class="w-full flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-100 text-slate-700 select-none"
+            class="group w-full flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-100 text-slate-700 select-none transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
           >
-            <span class="inline-block w-5 text-center">
+            <span :class="['inline-block w-5 text-center transition-transform duration-200', isGroupOpen(idx) ? 'rotate-180' : 'rotate-0']">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -35,7 +35,7 @@
               <button
                 v-else
                 @click="emit('select', normalizeKey(child.label))"
-                class="w-full flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-100 text-slate-700 select-none"
+                class="w-full flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-100 text-slate-700 select-none transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
               >
                 <span class="text-sm font-medium">{{ child.label }}</span>
               </button>
@@ -57,7 +57,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { MenuButton } from './base'
-// Static sidebar (sin validación por permisos)
 const emit = defineEmits(['select'])
 
 defineOptions({ name: 'SideBar' })
@@ -71,8 +70,6 @@ const isOpen = ref(props.defaultOpen)
 const defaultItems = [
   { label: 'Configuración', children: [
     { label: 'Roles', to: '' },
-    //{ label: 'Módulos', to: '' },
-    ///{ label: 'Permisos', to: '' },
     { label: 'Usuarios', to: '' }
   ] }
 ]
